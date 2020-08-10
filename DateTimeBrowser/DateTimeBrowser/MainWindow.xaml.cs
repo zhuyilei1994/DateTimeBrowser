@@ -23,6 +23,7 @@ namespace DateTimeBrowser
         public MainWindow()
         {
             InitializeComponent();
+            DataContext=new MainVM();
         }
     }
 }

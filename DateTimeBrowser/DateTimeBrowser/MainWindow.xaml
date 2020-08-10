@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DateTimeBrowser"
+        xmlns:datePicker="clr-namespace:DateTimeBrowser.DatePicker"
+        xmlns:timerPicker="clr-namespace:DateTimeBrowser.TimerPicker"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+       <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+           <TextBlock Text="Date and Time:"></TextBlock>
+           <datePicker:DatePickerView MaxWidth="120" Height="25" SelectedDate="{Binding Date}"></datePicker:DatePickerView>
+           <timerPicker:TimePicker Hour="{Binding Hour,Mode=TwoWay}" Minute="{Binding Minute,Mode=TwoWay}" 
+                                   Second="{Binding Second,Mode=TwoWay}" Width="90" Height="25" Margin="5,0,0,0"></timerPicker:TimePicker>
+       </StackPanel>
     </Grid>
 </Window>

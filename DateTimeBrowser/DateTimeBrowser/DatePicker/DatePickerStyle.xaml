@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DateTimeBrowser.DatePicker"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <Thickness x:Key="BaseErrorBorderThickness">0.5</Thickness>
+    <system:Double x:Key="BaseTextBoxWidth">180</system:Double>
+
+    <SolidColorBrush x:Key="ErrorBorderBrush" Color="Red"/>
+    <SolidColorBrush x:Key="ErrorPolygonFillBrush" Color="Red"/>
+
+    <Style TargetType="{x:Type DatePicker}"
+           x:Key="BaseDatePickerStyle">
+        <Setter Property="Width"
+                Value="{StaticResource BaseTextBoxWidth}" />
+        <Setter Property="Padding"
+                Value="3" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Focusable"
+                Value="True" />
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <AdornedElementPlaceholder x:Name="adorner">
+                            <Border BorderBrush="{StaticResource ErrorBorderBrush}"
+                                    BorderThickness="{StaticResource BaseErrorBorderThickness}" />
+                        </AdornedElementPlaceholder>
+                        <Polygon Fill="{StaticResource ErrorPolygonFillBrush}"
+                                 Margin="0,2,2,0"
+                                 Points="10,10 10,0 0,0"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Right" >
+                        </Polygon>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius"
+                        Value="1" />
+            </Style>
+
+            <Style x:Key="{x:Type ToolTip}" TargetType="{x:Type ToolTip}">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="{StaticResource ErrorPolygonFillBrush}"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="BorderThickness" Value="{StaticResource BaseErrorBorderThickness}"/>
+            </Style>
+        </Style.Resources>
+
+        <Style.Triggers>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                <Setter Property="Tag" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+</ResourceDictionary>
