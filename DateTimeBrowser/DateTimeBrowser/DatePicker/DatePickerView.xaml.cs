@@ -20,25 +20,9 @@ namespace DateTimeBrowser.DatePicker
     /// </summary>
     public partial class DatePickerView : UserControl
     {
-        public static readonly DependencyProperty DPFormatProperty = DependencyProperty.Register("DPFormat", typeof(string), typeof(DateTimeControl));
-
-        public static readonly DependencyProperty SeparatorProperty = DependencyProperty.Register("Seperator", typeof(string), typeof(DateTimeControl));
-
         public static readonly DependencyProperty SelectedDateProperty = DependencyProperty.Register("SelectedDate", typeof(Nullable<DateTime>),
             typeof(DatePickerView), new FrameworkPropertyMetadata(new Nullable<DateTime>(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 new PropertyChangedCallback(OnSelectedDateChanged)));
-
-        public string DPFormat
-        {
-            get { return this.GetValue(DPFormatProperty) as string; }
-            set { this.SetValue(DPFormatProperty, value); }
-        }
-
-        public string Seperator
-        {
-            get { return this.GetValue(SeparatorProperty) as string; }
-            set { this.SetValue(SeparatorProperty, value); }
-        }
 
         public DateTime? SelectedDate
         {
@@ -49,7 +33,7 @@ namespace DateTimeBrowser.DatePicker
         public DatePickerView()
         {
             InitializeComponent();
-            this.DataContext = this;
+            //this.DataContext = this;
         }
 
         /// <summary>
@@ -60,8 +44,9 @@ namespace DateTimeBrowser.DatePicker
         private static void OnSelectedDateChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as DatePickerView;
-            if (control != null)
-                control.CustomDatePicker.SelectedDate = control.SelectedDate;
+            if (control != null) {
+                control.CustomDatePicker.DataContext=control;
+            }
         }
 
         /// <summary>
