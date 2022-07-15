@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 
 namespace DateTimeBrowser
-{
+{//1212212
     class MainVM:ViewModelBase
     {
         private int _hour;
